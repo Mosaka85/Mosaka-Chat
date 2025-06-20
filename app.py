@@ -10,7 +10,6 @@ import os
 API_KEY = os.getenv("API_KEY")
 GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={API_KEY}"
 
-# Store conversation history per user
 conversation_history = {}
 
 def chatbot_response(prompt, user_id):
@@ -18,7 +17,6 @@ def chatbot_response(prompt, user_id):
         if user_id not in conversation_history:
             conversation_history[user_id] = []
 
-        # Add user's prompt
         conversation_history[user_id].append({"role": "user", "text": prompt})
 
         parts = [{"text": msg["text"]} for msg in conversation_history[user_id]]
@@ -37,13 +35,13 @@ def chatbot_response(prompt, user_id):
             data = response.json()
             response_text = data["candidates"][0]["content"]["parts"][0]["text"].strip()
 
-            # Optional customization
-            response_text = response_text.replace("Google", "MOSAKA Intelligence")
+            response_text = response_text.replace("Google", "Tshepiso Ndaba")
+            response_text = response_text.replace("Germini", "MOSAKA Intelligence")
 
             conversation_history[user_id].append({"role": "assistant", "text": response_text})
             return response_text
         else:
-            print("Gemini API error:", response.status_code, response.text)
+            print("MOSAKA Intelligence API error:", response.status_code, response.text)
             return "An error occurred while contacting Gemini API."
     except Exception as e:
         print("Error:", e)
