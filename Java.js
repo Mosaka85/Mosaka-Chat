@@ -1,19 +1,18 @@
-// Generate a unique user ID for this session
+
 const userId = 'user_' + Math.random().toString(36).substr(2, 9);
 console.log("User ID:", userId);
 
-// DOM elements
+
 const messagesDiv = document.getElementById('messages');
 const conversationList = document.getElementById('conversationList');
 const typingIndicator = document.getElementById('typingIndicator');
 const newConversationButton = document.getElementById('newConversationButton');
 const userInput = document.getElementById('userInput');
 
-// Conversation state
+
 let currentConversationId = null;
 let conversations = JSON.parse(localStorage.getItem('conversations')) || {};
 
-// Initialize the conversation
 function initConversation() {
     if (!conversations[userId]) {
         conversations[userId] = [];
@@ -28,7 +27,7 @@ function initConversation() {
     }
 }
 
-// Create a new conversation
+
 function createNewConversation() {
     const conversationId = 'conv_' + Date.now();
     const newConversation = {
@@ -44,13 +43,13 @@ function createNewConversation() {
     updateConversationList();
     clearMessages();
     
-    // Add welcome message
+
     addMessage('assistant', 'Hello! How can I help you today?', true);
     
     return conversationId;
 }
 
-// Load a conversation
+
 function loadConversation(conversationId) {
     const conversation = conversations[userId].find(conv => conv.id === conversationId);
     if (conversation) {
