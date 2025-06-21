@@ -42,7 +42,7 @@ def chatbot_response(prompt, user_id):
             return response_text
         else:
             print("MOSAKA Intelligence API error:", response.status_code, response.text)
-            return "An error occurred while contacting Gemini API."
+            return "An error occurred while contacting MOSAKA Intelligence API."
     except Exception as e:
         print("Error:", e)
         return "An unexpected error occurred."
